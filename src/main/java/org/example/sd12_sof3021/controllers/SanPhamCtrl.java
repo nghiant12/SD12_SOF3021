@@ -1,34 +1,38 @@
 package org.example.sd12_sof3021.controllers;
 
+import org.example.sd12_sof3021.entities.SanPham;
+import org.example.sd12_sof3021.repos.ass1.SanPhamRepo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
+@RequestMapping("san-pham")
 public class SanPhamCtrl {
-    @GetMapping("san-pham/create")
+    private final SanPhamRepo spRepo = new SanPhamRepo();
+
+    @GetMapping("index")
+    public String index(Model model) {
+        List<SanPham> ds = this.spRepo.findAll();
+        model.addAttribute("data", ds);
+        return "san_pham/index";
+    }
+
+    @GetMapping("create")
     public String create() {
         return "san_pham/create";
     }
 
-    @PostMapping("san-pham/store")
-    public String store(
-            @RequestParam("ma") String maSP,
-            @RequestParam("ten") String tenSP,
-            @RequestParam("trangThai") Integer trangThaiSP
-    ) {
-        System.out.println("SanPhamCtrl@store");
-        System.out.println(maSP);
-        System.out.println(tenSP);
-        System.out.println(trangThaiSP);
-        System.out.println("--------------------------");
+    @PostMapping("store")
+    public String store(SanPham sanPham) {
+        this.spRepo.create(sanPham);
         return "san_pham/create";
     }
-
-    @GetMapping("san-pham/index")
-    public String index() {
-        return "san_pham/index";
+    @GetMapping("delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        this.spRepo.deleteById(id);
+        return "san_pham/create";
     }
-
 }

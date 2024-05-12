@@ -16,6 +16,7 @@
         <th>ID</th>
         <th>Mã</th>
         <th>Tên</th>
+        <th>Sdt</th>
         <th>Trạng thái</th>
         <th colspan="2">Thao tác</th>
     </tr>
@@ -24,8 +25,9 @@
     <c:forEach items="${data}" var="kt">
         <tr>
             <td>${kt.id}</td>
-            <td>${kt.ma}</td>
+            <td>${kt.maKH}</td>
             <td>${kt.ten}</td>
+            <td>${kt.sdt}</td>
             <td>${kt.trangThai == 1 ? "Đang hoạt động" : " Ngừng hoạt động"}</td>
             <td>
                 <a href="#">Update</a>
