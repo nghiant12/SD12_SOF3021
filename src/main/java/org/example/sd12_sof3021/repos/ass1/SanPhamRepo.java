@@ -11,7 +11,9 @@ public class SanPhamRepo {
     public SanPhamRepo() {
         this.ds = new ArrayList<>();
         this.ds.add(new SanPham(1, "SP01", "Ao phong", 1));
-        this.ds.add(new SanPham(2, "SP02", "Ao da", 0));
+        this.ds.add(new SanPham(2, "SP02", "Ao vit", 1));
+        this.ds.add(new SanPham(3, "SP03", "Ao ga con", 0));
+
     }
 
     public List<SanPham> findAll() {
