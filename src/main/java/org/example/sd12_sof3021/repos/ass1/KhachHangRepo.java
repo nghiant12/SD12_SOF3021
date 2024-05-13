@@ -1,6 +1,7 @@
 package org.example.sd12_sof3021.repos.ass1;
 
 import org.example.sd12_sof3021.entities.KhachHang;
+import org.example.sd12_sof3021.entities.SanPham;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +40,15 @@ public class KhachHangRepo {
                 this.ds.remove(i);
             }
         }
+    }
+
+    public KhachHang findById(int id) {
+        for (int i = 0; i < this.ds.size(); i++) {
+            KhachHang kh = this.ds.get(i);
+            if (kh.getId() == id) {
+                return kh;
+            }
+        }
+        return null;
     }
 }

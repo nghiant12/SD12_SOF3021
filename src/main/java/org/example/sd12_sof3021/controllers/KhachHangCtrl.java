@@ -31,12 +31,25 @@ public class KhachHangCtrl {
     @PostMapping("store")
     public String store(KhachHang khachHang) {
         this.khachHangRepo.create(khachHang);
-        return "khach_hang/create";
+        return "redirect:/khach-hang/index";
     }
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         this.khachHangRepo.deleteById(id);
-        return "khach_hang/create";
+        return "redirect:/khach-hang/index";
+    }
+
+    @GetMapping("edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        KhachHang kh = this.khachHangRepo.findById(id);
+        model.addAttribute("data", kh);
+        return "khach_hang/edit";
+    }
+
+    @PostMapping("update/{id}")
+    public String update(KhachHang khachHang) {
+        this.khachHangRepo.update(khachHang);
+        return "redirect:/khach-hang/index";
     }
 }

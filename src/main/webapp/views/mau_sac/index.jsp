@@ -28,7 +28,7 @@
             <td>${m.ten}</td>
             <td>${m.trangThai == 1 ? "Đang hoạt động" : " Ngừng hoạt động"}</td>
             <td>
-                <a href="#">Update</a>
+                <a href="edit/${ m.id }">Update</a>
             </td>
             <td>
                 <a href="delete/${ m.id }">Delete</a>

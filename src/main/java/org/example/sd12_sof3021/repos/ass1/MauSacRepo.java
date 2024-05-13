@@ -1,6 +1,7 @@
 package org.example.sd12_sof3021.repos.ass1;
 
 import org.example.sd12_sof3021.entities.MauSac;
+import org.example.sd12_sof3021.entities.SanPham;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +40,15 @@ public class MauSacRepo {
                 this.ds.remove(i);
             }
         }
+    }
+
+    public MauSac findById(int id) {
+        for (int i = 0; i < this.ds.size(); i++) {
+            MauSac m = this.ds.get(i);
+            if (m.getId() == id) {
+                return m;
+            }
+        }
+        return null;
     }
 }

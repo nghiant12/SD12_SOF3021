@@ -28,11 +28,25 @@ public class SanPhamCtrl {
     @PostMapping("store")
     public String store(SanPham sanPham) {
         this.spRepo.create(sanPham);
-        return "san_pham/create";
+        return "redirect:/san-pham/index";
     }
+
     @GetMapping("delete/{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public String delete(@PathVariable("id") Integer id) {
         this.spRepo.deleteById(id);
-        return "san_pham/create";
+        return "redirect:/san-pham/index";
+    }
+
+    @GetMapping("edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        SanPham sp = this.spRepo.findById(id);
+        model.addAttribute("data", sp);
+        return "san_pham/edit";
+    }
+
+    @PostMapping("update/{id}")
+    public String update(SanPham sp) {
+        this.spRepo.update(sp);
+        return "redirect:/san-pham/index";
     }
 }

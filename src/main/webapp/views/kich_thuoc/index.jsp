@@ -28,7 +28,7 @@
             <td>${kt.ten}</td>
             <td>${kt.trangThai == 1 ? "Đang hoạt động" : " Ngừng hoạt động"}</td>
             <td>
-                <a href="#">Update</a>
+                <a href="edit/${ kt.id }">Update</a>
             </td>
             <td>
                 <a href="delete/${ kt.id }">Delete</a>

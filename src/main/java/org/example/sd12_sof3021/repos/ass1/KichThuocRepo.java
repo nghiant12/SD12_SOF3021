@@ -1,6 +1,7 @@
 package org.example.sd12_sof3021.repos.ass1;
 
 import org.example.sd12_sof3021.entities.KichThuoc;
+import org.example.sd12_sof3021.entities.MauSac;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,4 +41,15 @@ public class KichThuocRepo {
             }
         }
     }
+
+    public KichThuoc findById(int id) {
+        for (int i = 0; i < this.ds.size(); i++) {
+            KichThuoc k = this.ds.get(i);
+            if (k.getId() == id) {
+                return k;
+            }
+        }
+        return null;
+    }
+
 }

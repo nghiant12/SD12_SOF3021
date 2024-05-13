@@ -1,6 +1,7 @@
 package org.example.sd12_sof3021.controllers;
 
 import org.example.sd12_sof3021.entities.KichThuoc;
+import org.example.sd12_sof3021.entities.SanPham;
 import org.example.sd12_sof3021.repos.ass1.KichThuocRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,12 +32,25 @@ public class KichThuocCtrl {
     @PostMapping("store")
     public String store(KichThuoc kichThuoc) {
         this.kichThuocRepo.create(kichThuoc);
-        return "kich_thuoc/create";
+        return "redirect:/kich-thuoc/index";
     }
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         this.kichThuocRepo.deleteById(id);
-        return "kich_thuoc/create";
+        return "redirect:/kich-thuoc/index";
+    }
+
+    @GetMapping("edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        KichThuoc kt = this.kichThuocRepo.findById(id);
+        model.addAttribute("data", kt);
+        return "kich_thuoc/edit";
+    }
+
+    @PostMapping("update/{id}")
+    public String update(KichThuoc kt) {
+        this.kichThuocRepo.update(kt);
+        return "redirect:/kich-thuoc/index";
     }
 }

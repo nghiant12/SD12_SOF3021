@@ -22,18 +22,18 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${data}" var="kt">
+    <c:forEach items="${data}" var="kh">
         <tr>
-            <td>${kt.id}</td>
-            <td>${kt.maKH}</td>
-            <td>${kt.ten}</td>
-            <td>${kt.sdt}</td>
-            <td>${kt.trangThai == 1 ? "Đang hoạt động" : " Ngừng hoạt động"}</td>
+            <td>${kh.id}</td>
+            <td>${kh.maKH}</td>
+            <td>${kh.ten}</td>
+            <td>${kh.sdt}</td>
+            <td>${kh.trangThai == 1 ? "Đang hoạt động" : " Ngừng hoạt động"}</td>
             <td>
-                <a href="#">Update</a>
+                <a href="edit/${ kh.id }">Update</a>
             </td>
             <td>
-                <a href="delete/${ kt.id }">Delete</a>
+                <a href="delete/${ kh.id }">Delete</a>
             </td>
         </tr>
     </c:forEach>

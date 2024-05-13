@@ -41,4 +41,15 @@ public class SanPhamRepo {
             }
         }
     }
+
+    public SanPham findById(int id) {
+        for (int i = 0; i < this.ds.size(); i++) {
+            SanPham s = this.ds.get(i);
+            if (s.getId() == id) {
+                return s;
+            }
+        }
+        return null;
+    }
+    
 }
