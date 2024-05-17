@@ -1,12 +1,17 @@
 package org.example.sd12_sof3021.controllers;
 
+import jakarta.validation.Valid;
 import org.example.sd12_sof3021.entities.SanPham;
 import org.example.sd12_sof3021.repos.ass1.SanPhamRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("san-pham")
@@ -21,12 +26,26 @@ public class SanPhamCtrl {
     }
 
     @GetMapping("create")
-    public String create() {
+    public String create(@ModelAttribute("data") SanPham sanPham) {
         return "san_pham/create";
     }
 
     @PostMapping("store")
-    public String store(SanPham sanPham) {
+    public String store(
+            Model model,
+            @Valid SanPham sanPham,
+            BindingResult validateResult
+    ) {
+        if (validateResult.hasErrors()) {
+            List<FieldError> listError = validateResult.getFieldErrors();
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fe : listError) {
+                errors.put(fe.getField(), fe.getDefaultMessage());
+            }
+            model.addAttribute("errors", errors);
+            model.addAttribute("data", sanPham);
+            return "san_pham/create";
+        }
         this.spRepo.create(sanPham);
         return "redirect:/san-pham/index";
     }

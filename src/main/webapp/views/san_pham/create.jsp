@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -13,12 +14,18 @@
 <form action="/san-pham/store" method="POST">
     <div>
         <label>Mã: </label>
-        <input type="text" name="ma">
+        <input type="text" name="ma" value="${ data.ma }">
+        <c:if test="${not empty errors['ma']}">
+            <small style="color: red">${ errors["ma"] }</small>
+        </c:if>
     </div>
     <br>
     <div>
         <label>Tên: </label>
-        <input type="text" name="ten">
+        <input type="text" name="ten" value="${ data.ten }">
+        <c:if test="${not empty errors['ten']}">
+            <small style="color: red">${ errors["ten"] }</small>
+        </c:if>
     </div>
     <br>
     <div>

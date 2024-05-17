@@ -1,7 +1,5 @@
 package org.example.sd12_sof3021.entities;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,15 +10,13 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class SanPham {
+public class SanPhamCT {
     private Integer id;
-
-    @NotBlank(message = "Mã SP không được để trống")
+    private Integer spId;
     private String ma;
-
-    @NotBlank(message = "Tên SP không được để trống")
-    private String ten;
-
-    @NotNull
+    private String mau;
+    private String kichThuoc;
+    private int soLuong;
+    private float donGia;
     private int trangThai;
 }
