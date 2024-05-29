@@ -2,7 +2,10 @@ package org.example.sd12_sof3021.controllers;
 
 import jakarta.validation.Valid;
 import org.example.sd12_sof3021.entities.SanPham;
-import org.example.sd12_sof3021.repos.ass1.SanPhamRepo;
+import org.example.sd12_sof3021.repos.ass2.SanPhamRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +19,19 @@ import java.util.Map;
 @Controller
 @RequestMapping("san-pham")
 public class SanPhamCtrl {
-    private final SanPhamRepo spRepo = new SanPhamRepo();
+    @Autowired
+    private SanPhamRepo spRepo;
 
     @GetMapping("index")
-    public String index(Model model) {
-        List<SanPham> ds = this.spRepo.findAll();
+    public String index(
+            Model model,
+            @RequestParam(name = "page", defaultValue = "1") int pageNo,
+            @RequestParam(name = "limit", defaultValue = "10") int pageSize,
+            @RequestParam(name = "keyword", defaultValue = "") String keyword
+    ) {
+        PageRequest p = PageRequest.of(pageNo, pageSize);
+        String s = "%" + keyword + "%";
+        Page<SanPham> ds = this.spRepo.findByTenLike(s, p);
         model.addAttribute("data", ds);
         return "san_pham/index";
     }
@@ -46,7 +57,7 @@ public class SanPhamCtrl {
             model.addAttribute("data", sanPham);
             return "san_pham/create";
         }
-        this.spRepo.create(sanPham);
+        this.spRepo.save(sanPham);
         return "redirect:/san-pham/index";
     }
 
@@ -57,15 +68,14 @@ public class SanPhamCtrl {
     }
 
     @GetMapping("edit/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model) {
-        SanPham sp = this.spRepo.findById(id);
+    public String edit(@PathVariable("id") SanPham sp, Model model) {
         model.addAttribute("data", sp);
         return "san_pham/edit";
     }
 
     @PostMapping("update/{id}")
     public String update(SanPham sp) {
-        this.spRepo.update(sp);
+        this.spRepo.save(sp);
         return "redirect:/san-pham/index";
     }
 }

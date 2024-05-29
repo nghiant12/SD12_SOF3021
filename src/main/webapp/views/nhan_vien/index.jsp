@@ -10,37 +10,30 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/san-pham/index">
-    <div>
-        <label>Tên</label>
-        <input type="text" name="keyword">
-    </div>
-    <div>
-        <button>Tìm kiếm</button>
-    </div>
-</form>
 <table>
     <thead>
     <tr>
         <th>ID</th>
-        <th>Mã</th>
         <th>Tên</th>
+        <th>Mã nhân viên</th>
+        <th>Tên đăng nhập</th>
+        <th>Mật khẩu</th>
         <th>Trạng thái</th>
         <th colspan="2">Thao tác</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${ data.content }" var="sp">
+    <c:forEach items="${data}" var="nv">
         <tr>
-            <td>${sp.id}</td>
-            <td>${sp.ma}</td>
-            <td>${sp.ten}</td>
-            <td>${sp.trangThai == 1 ? "Đang hoạt động" : " Ngừng hoạt động"}</td>
+            <td>${nv.id}</td>
+            <td>${nv.ma}</td>
+            <td>${nv.ten}</td>
+            <td>${nv.tenDangNhap}</td>
+            <td>${nv.matKhau}</td>
+            <td>${nv.trangThai == 1 ? "Đang hoạt động" : " Ngừng hoạt động"}</td>
             <td>
-                <a href="edit/${ sp.id }">Update</a>
-            </td>
-            <td>
-                <a href="delete/${ sp.id }">Delete</a>
+                <a href="edit/${ nv.id }">Sửa</a>
+                <a href="delete/${ nv.id }">Xóa</a>
             </td>
         </tr>
     </c:forEach>
