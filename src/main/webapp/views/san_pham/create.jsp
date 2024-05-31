@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page language="java" pageEncoding="UTF-8" %>
+<%@page pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="f" uri="jakarta.tags.functions" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,32 +11,33 @@
     <title>Document</title>
 </head>
 <body>
-<h2>QLSP</h2>
-<form action="/san-pham/store" method="POST">
+<h2>Quan ly san pham</h2>
+
+<form method="POST" action="/san-pham/store">
     <div>
-        <label>Mã: </label>
-        <input type="text" name="ma" value="${ data.ma }">
-        <c:if test="${not empty errors['ma']}">
+        <label>Mã</label>
+        <input type="text" name="ma" value="${ data.ma }" />
+        <c:if test="${ not empty errors['ma'] }">
             <small style="color: red">${ errors["ma"] }</small>
         </c:if>
     </div>
-    <br>
     <div>
-        <label>Tên: </label>
-        <input type="text" name="ten" value="${ data.ten }">
-        <c:if test="${not empty errors['ten']}">
+        <label>Tên</label>
+        <input type="text" name="ten" value="${ data.ten }" />
+        <c:if test="${ not empty errors['ten'] }">
             <small style="color: red">${ errors["ten"] }</small>
         </c:if>
     </div>
-    <br>
     <div>
-        <label>Trạng thái: </label>
+        <label>Trạng thái</label>
         <select name="trangThai">
             <option value="1">Đang hoạt động</option>
             <option value="0">Ngừng hoạt động</option>
         </select>
+        <c:if test="${ not empty errors['trangThai'] }">
+            <small style="color: red">${ errors["trangThai"] }</small>
+        </c:if>
     </div>
-    <br>
     <div>
         <button>Lưu</button>
     </div>

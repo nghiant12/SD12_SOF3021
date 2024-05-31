@@ -12,24 +12,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-
 @Entity
-@Table(name = "SanPham")
+@Table(name="SanPham")
 public class SanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name="ID")
     private Integer id;
 
-    @NotBlank(message = "Mã SP không được để trống")
-    @Column(name = "Ma")
+    @NotBlank(message = "Không được để trống")
+    @Column(name="Ma")
     private String ma;
 
-    @NotBlank(message = "Tên SP không được để trống")
-    @Column(name = "Ten")
+    @NotBlank
+    @Column(name="Ten")
     private String ten;
 
     @NotNull
-    @Column(name = "TrangThai")
+    @Column(name="TrangThai")
     private int trangThai;
 }

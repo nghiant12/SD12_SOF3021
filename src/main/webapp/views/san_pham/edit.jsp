@@ -1,4 +1,6 @@
-<%@page language="java" pageEncoding="UTF-8" %>
+<%@page pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="f" uri="jakarta.tags.functions" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,26 +11,28 @@
     <title>Document</title>
 </head>
 <body>
-<h2>QLSP</h2>
-<form action="/san-pham/update/${data.id}" method="POST">
+<h2>Quan ly san pham</h2>
+
+<form method="POST" action="/san-pham/update/${ data.id }">
     <div>
-        <label>Mã: </label>
-        <input type="text" name="ma" value="${data.ma}">
+        <label>Mã</label>
+        <input type="text" name="ma" value="${ data.ma }" />
     </div>
-    <br>
     <div>
-        <label>Tên: </label>
-        <input type="text" name="ten" value="${data.ten}">
+        <label>Tên</label>
+        <input type="text" name="ten" value="${ data.ten }" />
     </div>
-    <br>
     <div>
-        <label>Trạng thái: </label>
+        <label>Trạng thái</label>
         <select name="trangThai">
-            <option value="1" ${data.trangThai == 1 ? "selected" : ""}>Đang hoạt động</option>
-            <option value="0" ${data.trangThai == 0 ? "selected" : ""}>Ngừng hoạt động</option>
+            <option value="1" ${ data.trangThai == 1 ? "selected" : "" }>
+                Đang hoạt động
+            </option>
+            <option value="0" ${ data.trangThai == 0 ? "selected" : "" }>
+                Ngừng hoạt động
+            </option>
         </select>
     </div>
-    <br>
     <div>
         <button>Lưu</button>
     </div>

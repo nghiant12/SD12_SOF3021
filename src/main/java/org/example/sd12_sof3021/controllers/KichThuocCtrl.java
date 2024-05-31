@@ -1,7 +1,6 @@
 package org.example.sd12_sof3021.controllers;
 
 import org.example.sd12_sof3021.entities.KichThuoc;
-import org.example.sd12_sof3021.entities.SanPham;
 import org.example.sd12_sof3021.repos.ass1.KichThuocRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

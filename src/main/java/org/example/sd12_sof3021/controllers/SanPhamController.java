@@ -2,7 +2,7 @@ package org.example.sd12_sof3021.controllers;
 
 import jakarta.validation.Valid;
 import org.example.sd12_sof3021.entities.SanPham;
-import org.example.sd12_sof3021.repos.ass2.SanPhamRepo;
+import org.example.sd12_sof3021.repos.ass2.SanPhamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,17 +18,12 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("san-pham")
-public class SanPhamCtrl {
+public class SanPhamController {
     @Autowired
-    private SanPhamRepo spRepo;
+    private SanPhamRepository spRepo;
 
     @GetMapping("index")
-    public String index(
-            Model model,
-            @RequestParam(name = "page", defaultValue = "1") int pageNo,
-            @RequestParam(name = "limit", defaultValue = "10") int pageSize,
-            @RequestParam(name = "keyword", defaultValue = "") String keyword
-    ) {
+    public String index(@RequestParam(name = "page", defaultValue = "1") int pageNo, @RequestParam(name = "limit", defaultValue = "10") int pageSize, @RequestParam(name = "keyword", defaultValue = "") String keyword, Model model) {
         PageRequest p = PageRequest.of(pageNo, pageSize);
         String s = "%" + keyword + "%";
         Page<SanPham> ds = this.spRepo.findByTenLike(s, p);
@@ -37,27 +32,26 @@ public class SanPhamCtrl {
     }
 
     @GetMapping("create")
-    public String create(@ModelAttribute("data") SanPham sanPham) {
+    public String create(@ModelAttribute("data") SanPham sp) {
         return "san_pham/create";
     }
 
     @PostMapping("store")
-    public String store(
-            Model model,
-            @Valid SanPham sanPham,
-            BindingResult validateResult
-    ) {
+    public String store(Model model, @Valid SanPham sp, BindingResult validateResult) {
         if (validateResult.hasErrors()) {
             List<FieldError> listError = validateResult.getFieldErrors();
             Map<String, String> errors = new HashMap<>();
+
             for (FieldError fe : listError) {
                 errors.put(fe.getField(), fe.getDefaultMessage());
             }
+
             model.addAttribute("errors", errors);
-            model.addAttribute("data", sanPham);
+            model.addAttribute("data", sp);
             return "san_pham/create";
         }
-        this.spRepo.save(sanPham);
+
+        this.spRepo.save(sp);
         return "redirect:/san-pham/index";
     }
 
